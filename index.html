@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Geolocation Test</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<style type="text/css">
+		*{
+			box-sizing: border-box;
+		}
+		.container{
+			width: 100%;
+			padding: 15px;
+		}
+		.header{
+			width: 100%;
+			text-align: center;
+			margin-bottom: 15px;
+		}
+		.content{
+			text-align: center;
+		}
+		.data-box{
+			background-color: #CCC;
+			margin: 0 auto;
+			padding: 15px;
+			text-align: center;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+
+		<div class="header">
+			<h1>Location Data</h1>
+		</div>
+
+		<div class="content">
+			<div class="data-box">No Location Info</div>
+		</div>
+	</div>
+	<script>
+		var display = $('.data-box');
+		setInterval(function(){ getLocation(); }, 3000);
+		function getLocation() {
+		    if (navigator.geolocation) {
+		        navigator.geolocation.getCurrentPosition(showPosition, showError);
+		    } else {
+		        display.text("Geolocation is not supported by this browser.");
+		    }
+		}
+		function showPosition(position) {
+		    display.text(position.coords.latitude + ", " + position.coords.longitude); 
+		}
+		function showError(error) {
+		    switch(error.code) {
+		        case error.PERMISSION_DENIED:
+		            display.text("User denied the request for Geolocation.");
+		            break;
+		        case error.POSITION_UNAVAILABLE:
+		            display.text("Location information is unavailable.");
+		            break;
+		        case error.TIMEOUT:
+		            display.text("The request to get user location timed out.");
+		            break;
+		        case error.UNKNOWN_ERROR:
+		            display.text("An unknown error occurred.");
+		            break;
+		    }
+		}
+	</script>
+</body>
+</html>
