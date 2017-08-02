@@ -44,14 +44,14 @@
 		// NW 42.915764, -85.522509
 		// SE 42.911099, -85.513361
 
-		// Home:
-		// NW 42.919194, -85.722863
-		// SE 42.918432, -85.721900
-
 		// 131:
 		// NW 42.915591, -85.687446
 		// SE 42.911666, -85.668563
-		
+
+		// Home:
+		// NW 42.919194 (lat), -85.722863 (lon)
+		// SE 42.918432 (lat), -85.721900 (lon)
+
 		var display = $('.data-box');
 		setInterval(function(){ getLocation(); }, 3000);
 		function getLocation() {
@@ -62,7 +62,22 @@
 		    }
 		}
 		function showPosition(position) {
-		    display.text(position.coords.latitude + ", " + position.coords.longitude); 
+			var coords = position.coords.latitude + ", " + position.coords.longitude;
+			var lat = parseFloat(position.coords.latitude);
+			var lon = parseFloat(position.coords.longitude);
+
+			if (lat < 42.919194 && lat > 42.918432 && lon > -85.722863 && lon < -85.721900) {
+				display.text("Home: " + coords);
+			}
+			else if (lat < 42.915764 && lat > 42.911099 && lon > -85.522509 && lon < -85.513361) {
+				display.text("Work: " + coords);
+			}
+			else if (lat < 42.915591 && lat > 42.911666 && lon > -85.687446 && lon < -85.668563) {
+				display.text("131: " + coords);
+			}
+			else{
+				display.text("No Location Info");
+			}
 		}
 		function showError(error) {
 		    switch(error.code) {
