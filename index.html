@@ -36,7 +36,7 @@
 		</div>
 
 		<div class="content">
-			<div class="data-box">No Location Info</div>
+			<div class="data-box"><p>No Location Info</p></div>
 		</div>
 	</div>
 	<script>
@@ -84,7 +84,7 @@
 		    if (navigator.geolocation) {
 		        navigator.geolocation.getCurrentPosition(showPosition, showError);
 		    } else {
-		        display.text("Geolocation is not supported by this browser.");
+		        display.html("<p>Geolocation is not supported by this browser.</p>");
 		    }
 		}
 
@@ -97,7 +97,7 @@
 			for (var i = 0; i <= locationData.length-1; i++) {
 
 				if (lat < locationData[i].nw.lat && lat > locationData[i].se.lat && lon > locationData[i].nw.lon && lon < locationData[i].se.lon){
-					displayText = locationData[i].label + ": " + coords;
+					displayText = "<p>" + locationData[i].label + ": <br>" + coords + "</p>";
 				}
 			}
 
@@ -105,23 +105,23 @@
 				display.text(displayText);
 			}
 			else{
-				display.text("No info for this location.");
+				display.html("<p>No info for this location.<br> " + coords + "</p>");
 			}
 		}
 
 		function showError(error) {
 		    switch(error.code) {
 		        case error.PERMISSION_DENIED:
-		            display.text("User denied the request for Geolocation.");
+		            display.html("<p>User denied the request for Geolocation.</p>");
 		            break;
 		        case error.POSITION_UNAVAILABLE:
-		            display.text("Location information is unavailable.");
+		            display.html("<p>Location information is unavailable.</p>");
 		            break;
 		        case error.TIMEOUT:
-		            display.text("The request to get user location timed out.");
+		            display.html("<p>The request to get user location timed out.</p>");
 		            break;
 		        case error.UNKNOWN_ERROR:
-		            display.text("An unknown error occurred.");
+		            display.html("<p>An unknown error occurred.</p>");
 		            break;
 		    }
 		}
