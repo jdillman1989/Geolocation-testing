@@ -40,20 +40,46 @@
 		</div>
 	</div>
 	<script>
-		// Work: 
-		// NW 42.915764, -85.522509
-		// SE 42.911099, -85.513361
 
-		// 131:
-		// NW 42.915591, -85.687446
-		// SE 42.911666, -85.668563
-
-		// Home:
-		// NW 42.919194 (lat), -85.722863 (lon)
-		// SE 42.918432 (lat), -85.721900 (lon)
+		var locationData = [
+			{
+				"label": "Work",
+				"nw": {
+					"lat": 42.915764,
+					"lon": -85.522509
+				},
+				"se": {
+					"lat": 42.911099,
+					"lon": -85.513361
+				}
+			},
+			{
+				"label": "131",
+				"nw": {
+					"lat": 42.915591,
+					"lon": -85.687446
+				},
+				"se": {
+					"lat": 42.911666,
+					"lon": -85.668563
+				}
+			},
+			{
+				"label": "Home",
+				"nw": {
+					"lat": 42.919194,
+					"lon": -85.722863
+				},
+				"se": {
+					"lat": 42.918432,
+					"lon": -85.721900
+				}
+			}
+		];
 
 		var display = $('.data-box');
 		setInterval(function(){ getLocation(); }, 3000);
+
 		function getLocation() {
 		    if (navigator.geolocation) {
 		        navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -61,24 +87,28 @@
 		        display.text("Geolocation is not supported by this browser.");
 		    }
 		}
+
 		function showPosition(position) {
 			var coords = position.coords.latitude + ", " + position.coords.longitude;
 			var lat = parseFloat(position.coords.latitude);
 			var lon = parseFloat(position.coords.longitude);
+			var displayText = false;
 
-			if (lat < 42.919194 && lat > 42.918432 && lon > -85.722863 && lon < -85.721900) {
-				display.text("Home: " + coords);
+			for (var i = 0; i <= locationData.length-1; i++) {
+
+				if (lat < data[i].nw.lat && lat > data[i].se.lat && lon > data[i].nw.lon && lon < data[i].se.lon){
+					displayText = data[i].label + ": " + coords;
+				}
 			}
-			else if (lat < 42.915764 && lat > 42.911099 && lon > -85.522509 && lon < -85.513361) {
-				display.text("Work: " + coords);
-			}
-			else if (lat < 42.915591 && lat > 42.911666 && lon > -85.687446 && lon < -85.668563) {
-				display.text("131: " + coords);
+
+			if (displayText) {
+				display.text(displayText);
 			}
 			else{
-				display.text("No Location Info: " + lat + " " + lon);
+				display.text("No info for this location.");
 			}
 		}
+
 		function showError(error) {
 		    switch(error.code) {
 		        case error.PERMISSION_DENIED:
