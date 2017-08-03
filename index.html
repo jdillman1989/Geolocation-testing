@@ -96,8 +96,8 @@
 
 			for (var i = 0; i <= locationData.length-1; i++) {
 
-				if (lat < data[i].nw.lat && lat > data[i].se.lat && lon > data[i].nw.lon && lon < data[i].se.lon){
-					displayText = data[i].label + ": " + coords;
+				if (lat < locationData[i].nw.lat && lat > locationData[i].se.lat && lon > locationData[i].nw.lon && lon < locationData[i].se.lon){
+					displayText = locationData[i].label + ": " + coords;
 				}
 			}
 
