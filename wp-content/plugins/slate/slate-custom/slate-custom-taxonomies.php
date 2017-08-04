@@ -25,9 +25,8 @@ class Slate_Custom_Taxonomies {
      */
 
     public function slate_taxonomy_init() {
-        new Slate_Taxonomy('Category', 'characters');
-        new Slate_Taxonomy('Category', 'items');
-        new Slate_Taxonomy('Category', 'locations');
+        new Slate_Taxonomy('Character Categories', 'characters');
+        new Slate_Taxonomy('Item Categories', 'items');
     }
 
 }
