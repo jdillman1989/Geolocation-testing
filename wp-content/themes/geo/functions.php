@@ -6,12 +6,6 @@ new _Container("AJAX_Service");
 // Load the theme assets.
 new _Container("Assets_Service");
 
-// Set up Alloy.
-define('alloy_dir', _template_dir . '/alloy');
-
-include_once alloy_dir . '/alloy.php';
-$alloy = new Alloy;
-
 function geo_remove_submenu() {
 
     remove_menu_page( 'edit-comments.php' );
