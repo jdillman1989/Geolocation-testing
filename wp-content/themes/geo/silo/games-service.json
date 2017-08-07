@@ -1,0 +1,9 @@
+{
+	"acf_fields": [
+		"description",
+		"play_area_nw_lat",
+		"play_area_nw_lon",
+		"play_area_se_lat",
+		"play_area_se_lon",
+	]
+}

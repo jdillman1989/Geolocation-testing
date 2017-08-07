@@ -1,0 +1,16 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+  <div class="container">
+
+    <div class="header">
+      <h1>{{ title }}</h1>
+    </div>
+
+    <div class="content">
+      <div class="data-box" data-id="{{ id }}" data-nwlat="{{ data.play_area_nw_lat }}" data-nwlon="{{ data.play_area_nw_lon }}" data-selat="{{ data.play_area_se_lat }}" data-selon="{{ data.play_area_se_lon }}"><p>No Location Info</p></div>
+    </div>
+  </div>
+
+{% endblock %}
