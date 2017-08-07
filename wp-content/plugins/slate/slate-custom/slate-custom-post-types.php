@@ -47,7 +47,7 @@ class Slate_Custom_Post_Types {
             'has_archive' => true,
             'rewrite' => array(
                 'with_front' => false,
-                'slug' => 'games'
+                'slug' => 'game-library'
             )
         ));
 

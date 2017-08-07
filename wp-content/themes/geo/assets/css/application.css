@@ -19,3 +19,25 @@
 	padding: 15px;
 	text-align: center;
 }
+
+
+
+.games-grid{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 15px;
+}
+
+.game{
+	display: block;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	padding: 10px;
+	margin: 10px;
+	text-align: center;
+}
+
+.game img, .game h3{
+	display: block;
+	margin: 0 auto;
+}

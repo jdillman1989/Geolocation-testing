@@ -1,53 +1,14 @@
 $(document).ready(function(){
 
-	// Test Data
-	var mapData = [
-		{
-			"label": "Work",
-			"location": {
-				"nw": {
-					"lat": 42.915764,
-					"lon": -85.522509
-				},
-				"se": {
-					"lat": 42.911099,
-					"lon": -85.513361
-				}
-			},
-			"description": "test"
-		},
-		{
-			"label": "131",
-			"location": {
-				"nw": {
-					"lat": 42.915591,
-					"lon": -85.687446
-				},
-				"se": {
-					"lat": 42.911666,
-					"lon": -85.668563
-				}
-			},
-			"description": "test"
-		},
-		{
-			"label": "Home",
-			"location": {
-				"nw": {
-					"lat": 42.919194,
-					"lon": -85.722863
-				},
-				"se": {
-					"lat": 42.918432,
-					"lon": -85.721900
-				}
-			},
-			"description": "test"
-		}
-	];
-
 	var display = $('.data-box');
-	setInterval(function(){ getLocation(); }, 3000);
+	if (display) {
+		var nwlat = display.data("nwlat"),
+			nwlon = display.data("nwlon"),
+			selat = display.data("selat"),
+			selon = display.data("selon"),
+			gameID = display.data("id");
+		setInterval(function(){ getLocation(); }, 10000);
+	}
 
 	function getLocation() {
 	    if (navigator.geolocation) {
@@ -61,22 +22,50 @@ $(document).ready(function(){
 		var coords = position.coords.latitude + ", " + position.coords.longitude;
 		var lat = parseFloat(position.coords.latitude);
 		var lon = parseFloat(position.coords.longitude);
-		var displayText = false;
+		var inPlay = false;
 
-		for (var i = 0; i <= mapData.length-1; i++) {
+		if (lat < nwlat && lat > selat && lon > nwlon && lon < selon){
 
-			if (lat < mapData[i].location.nw.lat && lat > mapData[i].location.se.lat && lon > mapData[i].location.nw.lon && lon < mapData[i].location.se.lon){
-				displayText = "<p>" + mapData[i].label + ": <br>" + coords + "</p>";
-			}
+			display.html("<p>Loading game data...</p>");
+
+			$.ajax({
+				type: 'POST',
+				url: '/wp-admin/admin-ajax.php?action=play_area',
+				async: true,
+				data: {data:gameID},
+				complete: function(response) {
+					console.log(response.responseText);
+				}
+			});
+
+			inPlay = true;
 		}
 
-		if (displayText) {
-			display.html(displayText);
-		}
-		else{
-			display.html("<p>No info for this location.<br> " + coords + "</p>");
+		if (!inPlay) {
+			display.html("<p>Please move into this game's play area.<br> " + coords + "</p>");
 		}
 	}
+
+	// function showPosition(position) {
+	// 	var coords = position.coords.latitude + ", " + position.coords.longitude;
+	// 	var lat = parseFloat(position.coords.latitude);
+	// 	var lon = parseFloat(position.coords.longitude);
+	// 	var displayText = false;
+
+	// 	for (var i = 0; i <= mapData.length-1; i++) {
+
+	// 		if (lat < mapData[i].location.nw.lat && lat > mapData[i].location.se.lat && lon > mapData[i].location.nw.lon && lon < mapData[i].location.se.lon){
+	// 			displayText = "<p>" + mapData[i].label + ": <br>" + coords + "</p>";
+	// 		}
+	// 	}
+
+	// 	if (displayText) {
+	// 		display.html(displayText);
+	// 	}
+	// 	else{
+	// 		display.html("<p>No info for this location.<br> " + coords + "</p>");
+	// 	}
+	// }
 
 	function showError(error) {
 	    switch(error.code) {

@@ -5,12 +5,17 @@
   <div class="container">
 
     <div class="header">
-      <h1>Location Data</h1>
+      <h1>Games</h1>
     </div>
-
-    <div class="content">
-      <div class="data-box"><p>No Location Info</p></div>
-    </div>
+	
+	<div class="games-grid">
+		{% for game in games %}
+			<a class="game" href="{{ game.permalink }}">
+				<img src="{{ game.image }}">
+				<h3>{{ game.title }}</h3>
+			</a>
+		{% endfor %}
+	</div>
   </div>
 
 {% endblock %}

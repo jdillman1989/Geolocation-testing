@@ -24,3 +24,17 @@ function cc_mime_types($mimes) {
   return $mimes;
 }
 add_filter('upload_mimes', 'cc_mime_types');
+
+add_action( 'wp_ajax_play_area', 'enter_play_area' );
+add_action( 'wp_ajax_nopriv_play_area', 'enter_play_area' );
+
+function enter_play_area() {
+
+	$resonse = array();
+
+    $gameid = $_POST['data'];
+
+    echo $response;
+    
+    wp_die();
+}
