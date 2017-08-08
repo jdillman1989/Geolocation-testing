@@ -35,6 +35,7 @@ $(document).ready(function(){
 				data: {data:gameID},
 				complete: function(response) {
 					console.log(response.responseText);
+					display.html("<p>" + response.responseText + ".</p>");
 				}
 			});
 
