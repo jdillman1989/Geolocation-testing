@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
 	var display = $('.data-box');
+	var inPlay = false;
+
 	if (display) {
 		var nwlat = display.data("nwlat"),
 			nwlon = display.data("nwlon"),
@@ -22,24 +24,26 @@ $(document).ready(function(){
 		var coords = position.coords.latitude + ", " + position.coords.longitude;
 		var lat = parseFloat(position.coords.latitude);
 		var lon = parseFloat(position.coords.longitude);
-		var inPlay = false;
 
 		if (lat < nwlat && lat > selat && lon > nwlon && lon < selon){
 
-			display.html("<p>Loading game data...</p>");
+			if (!inPlay) {
 
-			$.ajax({
-				type: 'POST',
-				url: '/wp-admin/admin-ajax.php?action=play_area',
-				async: true,
-				data: {data:gameID},
-				complete: function(response) {
-					console.log(response.responseText);
-					display.html("<p>" + response.responseText + ".</p>");
-				}
-			});
-
-			inPlay = true;
+				display.html("<p>Loading game data...</p>");
+				$.ajax({
+					type: 'POST',
+					url: '/wp-admin/admin-ajax.php?action=play_area',
+					data: {data:gameID},
+					complete: function(response) {
+						console.log(response.responseText);
+						display.html("<p>" + response.responseText + ".</p>");
+						inPlay = true;
+					}
+				});
+			}
+		}
+		else{
+			inPlay = false;
 		}
 
 		if (!inPlay) {
