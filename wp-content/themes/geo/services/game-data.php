@@ -12,7 +12,7 @@ class Game_Data {
 		// 			),
 		// 			'se' => array(
 		// 				'lat' => $selat,
-		// 				'lon' => $selon 
+		// 				'lon' => $selon
 		// 			)
 		// 		),
 		// 		'2' => array(
@@ -135,7 +135,8 @@ class Game_Data {
 				'se' => array(
 					'lat' => $location['se_lat'],
 					'lon' => $location['se_lon']
-				)
+				),
+				'xref' => 'locations'
 			);
 			$coords_index++;
 		}
@@ -164,7 +165,8 @@ class Game_Data {
 				'se' => array(
 					'lat' => $coords_area['se_lat'],
 					'lon' => $coords_area['se_lon']
-				)
+				),
+				'xref' => 'characters'
 			);
 			$coords_index++;
 		}
@@ -193,7 +195,8 @@ class Game_Data {
 				'se' => array(
 					'lat' => $coords_area['se_lat'],
 					'lon' => $coords_area['se_lon']
-				)
+				),
+				'xref' => 'items'
 			);
 			$coords_index++;
 		}

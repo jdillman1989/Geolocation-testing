@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	var display = $('.data-box');
 	var inPlay = false;
+	var locationData = {};
 
 	if (display) {
 		var nwlatRaw = display.data("nwlat"),
@@ -20,7 +21,7 @@ $(document).ready(function(){
 
 	function getLocation() {
 	    if (navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(showPosition, showError);
+			navigator.geolocation.getCurrentPosition(showPosition, showError);
 	    }
 	    else {
 	        display.html("<p>Geolocation is not supported by this browser.</p>");
@@ -42,8 +43,10 @@ $(document).ready(function(){
 					url: '/wp-admin/admin-ajax.php?action=play_area',
 					data: {data:gameID},
 					complete: function(response) {
-						console.log(response.responseText);
-						display.html("<p>" + response.responseText + "</p>");
+						locationData = response.responseText;
+						setInterval(function(){
+							navigator.geolocation.getCurrentPosition(watchLocations, showError);
+						}, 2000);
 					}
 				});
 				inPlay = true;
@@ -58,26 +61,23 @@ $(document).ready(function(){
 		}
 	}
 
-	// function showPosition(position) {
-	// 	var coords = position.coords.latitude + ", " + position.coords.longitude;
-	// 	var lat = parseFloat(position.coords.latitude);
-	// 	var lon = parseFloat(position.coords.longitude);
-	// 	var displayText = false;
+	function watchLocations(position) {
+		var lat = parseFloat(position.coords.latitude);
+		var lon = parseFloat(position.coords.longitude);
 
-	// 	for (var i = 0; i <= mapData.length-1; i++) {
+		for (var i = 0; i <= locationData.coords.length-1; i++) {
 
-	// 		if (lat < mapData[i].location.nw.lat && lat > mapData[i].location.se.lat && lon > mapData[i].location.nw.lon && lon < mapData[i].location.se.lon){
-	// 			displayText = "<p>" + mapData[i].label + ": <br>" + coords + "</p>";
-	// 		}
-	// 	}
-
-	// 	if (displayText) {
-	// 		display.html(displayText);
-	// 	}
-	// 	else{
-	// 		display.html("<p>No info for this location.<br> " + coords + "</p>");
-	// 	}
-	// }
+			if (lat < locationData.coords[i].nw.lat && lat > locationData.coords[i].se.lat && lon > locationData.coords[i].nw.lon && lon < locationData.coords[i].se.lon){
+				
+				for (var n = 0; n <= locationData.data[locationData.coords[i].xref].length-1; n++) {
+					
+					if (locationData.data[locationData.coords[i].xref][n].coords == i) {
+						display.html("<p>" + locationData.data[locationData.coords[i].xref][n].description + "</p>");
+					}
+				}
+			}
+		}
+	}
 
 	function showError(error) {
 	    switch(error.code) {
