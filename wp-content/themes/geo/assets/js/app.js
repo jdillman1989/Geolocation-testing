@@ -32,14 +32,6 @@ $(document).ready(function(){
 		var lat = parseFloat(position.coords.latitude);
 		var lon = parseFloat(position.coords.longitude);
 
-		console.log(lat);
-		console.log(lon);
-
-		console.log(nwlat);
-		console.log(nwlon);
-		console.log(selat);
-		console.log(selon);
-
 		if (lat < nwlat && lat > selat && lon > nwlon && lon < selon){
 
 			if (!inPlay) {
