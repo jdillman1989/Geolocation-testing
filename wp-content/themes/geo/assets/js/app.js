@@ -21,7 +21,8 @@ $(document).ready(function(){
 	function getLocation() {
 	    if (navigator.geolocation) {
 	        navigator.geolocation.getCurrentPosition(showPosition, showError);
-	    } else {
+	    }
+	    else {
 	        display.html("<p>Geolocation is not supported by this browser.</p>");
 	    }
 	}
@@ -30,6 +31,14 @@ $(document).ready(function(){
 		var coords = position.coords.latitude + ", " + position.coords.longitude;
 		var lat = parseFloat(position.coords.latitude);
 		var lon = parseFloat(position.coords.longitude);
+
+		console.log(lat);
+		console.log(lon);
+
+		console.log(nwlat);
+		console.log(nwlon);
+		console.log(selat);
+		console.log(selon);
 
 		if (lat < nwlat && lat > selat && lon > nwlon && lon < selon){
 
