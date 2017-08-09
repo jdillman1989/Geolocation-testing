@@ -4,11 +4,17 @@ $(document).ready(function(){
 	var inPlay = false;
 
 	if (display) {
-		var nwlat = display.data("nwlat"),
-			nwlon = display.data("nwlon"),
-			selat = display.data("selat"),
-			selon = display.data("selon"),
+		var nwlatRaw = display.data("nwlat"),
+			nwlonRaw = display.data("nwlon"),
+			selatRaw = display.data("selat"),
+			selonRaw = display.data("selon"),
 			gameID = display.data("id");
+
+		var nwlat = parseFloat(nwlatRaw),
+			nwlon = parseFloat(nwlonRaw),
+			selat = parseFloat(selatRaw),
+			selon = parseFloat(selonRaw);
+
 		setInterval(function(){ getLocation(); }, 10000);
 	}
 
