@@ -16,10 +16,11 @@ class Game_Service {
 
 		$context = Timber::get_context();
 		$context['data'] = $this->data;
-		$context['theme_url'] = get_template_directory_uri();
 
 		$context['title'] = get_the_title($this->post_id);
 		$context['id'] = $this->post_id;
+
+		var_dump($context['data']);
 
 		Timber::render( theme_views . '/game.twig', $context);
 	}
