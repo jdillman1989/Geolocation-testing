@@ -43,9 +43,9 @@ $(document).ready(function(){
 					complete: function(response) {
 						console.log(response.responseText);
 						display.html("<p>" + response.responseText + "</p>");
-						inPlay = true;
 					}
 				});
+				inPlay = true;
 			}
 		}
 		else{
