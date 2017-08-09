@@ -7,6 +7,7 @@ class Game_Service {
 	public function __construct($data, $post_id="", $extra_data="") {
 
 		$this->data = $data;
+		$this->post_id = $post_id;
 		$this->load_view();
 	}
 
