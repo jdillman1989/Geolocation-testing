@@ -19,8 +19,6 @@ class Game_Service {
 		$context['title'] = get_the_title($this->post_id);
 		$context['id'] = $this->post_id;
 
-		var_dump($context['data']);
-
 		Timber::render( theme_views . '/game.twig', $context);
 	}
 }
