@@ -68,13 +68,13 @@ class Game_Data {
 		// 	),
 		// 	'data' => array(
 		// 		'locations' => array(
-		// 			'spot1' => array(
+		// 			0 => array(
 		// 				'name' => $name,
 		// 				'description' => $description,
 		// 				'image' => $image,
 		// 				'coords' => '1'
 		// 			),
-		// 			'spot2' => array(
+		// 			1 => array(
 		// 				'name' => $name,
 		// 				'description' => $description,
 		// 				'image' => $image,
@@ -82,13 +82,13 @@ class Game_Data {
 		// 			)
 		// 		),
 		// 		'characters' => array(
-		// 			'char1' => array(
+		// 			0 => array(
 		// 				'name' => $title,
 		// 				'description' => $description,
 		// 				'image' => $image,
 		// 				'coords' => '3'
 		// 			),
-		// 			'char2' => array(
+		// 			1 => array(
 		// 				'name' => $title,
 		// 				'description' => $description,
 		// 				'image' => $image,
@@ -96,13 +96,13 @@ class Game_Data {
 		// 			)
 		// 		),
 		// 		'items' => array(
-		// 			'item1' => array(
+		// 			0 => array(
 		// 				'name' => $title,
 		// 				'description' => $description,
 		// 				'image' => $image,
 		// 				'coords' => '5'
 		// 			),
-		// 			'item2' => array(
+		// 			1 => array(
 		// 				'name' => $title,
 		// 				'description' => $description,
 		// 				'image' => $image,
@@ -121,7 +121,7 @@ class Game_Data {
 		$location_data = array();
 		foreach ($locations as $location) {
 
-			$location_data[$location['name']] = array(
+			$location_data[] = array(
 				'name' => $location['name'],
 				'description' => $location['description'],
 				'image' => $location['image'],
@@ -148,7 +148,7 @@ class Game_Data {
 			$character_id = $character['select_character'];
 			$character_title = get_the_title($character_id);
 
-			$character_data[$character_title] = array(
+			$character_data[] = array(
 				'name' => $character_title,
 				'description' => get_field('description', $character_id),
 				'image' => get_field('image', $character_id),
@@ -178,7 +178,7 @@ class Game_Data {
 			$item_id = $item['select_item'];
 			$item_title = get_the_title($item_id);
 
-			$item_data[$item_title] = array(
+			$item_data[] = array(
 				'name' => $item_title,
 				'description' => get_field('description', $item_id),
 				'image' => get_field('image', $item_id),

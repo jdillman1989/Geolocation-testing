@@ -66,22 +66,42 @@ $(document).ready(function(){
 		var lat = parseFloat(position.coords.latitude);
 		var lon = parseFloat(position.coords.longitude);
 
-		console.log(locationData);
-
 		for (var i = 0; i <= locationData.coords.length-1; i++) {
 
-			console.log(locationData.coords[i]);
-
 			if (lat < locationData.coords[i].nw.lat && lat > locationData.coords[i].se.lat && lon > locationData.coords[i].nw.lon && lon < locationData.coords[i].se.lon){
-				
+
 				for (var n = 0; n <= locationData.data[locationData.coords[i].xref].length-1; n++) {
-					
-					if (locationData.data[locationData.coords[i].xref][n].coords == i) {
-						display.html("<p>" + locationData.data[locationData.coords[i].xref][n].description + "</p>");
+
+					var xref = locationData.coords[i].xref;
+
+					if (locationData.data[xref][n].coords == i) {
+						switch(xref) {
+							case "locations":
+								displayLocation(locationData.data[xref][n]);
+								break;
+							case "characters":
+								displayCharacter(locationData.data[xref][n]);
+								break;
+							case "items":
+								displayItem(locationData.data[xref][n]);
+								break;
+						}
 					}
 				}
 			}
 		}
+	}
+
+	function displayLocation(data) {
+		display.html("<p>" + data.description + "</p>");
+	}
+
+	function displayCharacter(data) {
+		display.html("<p>" + data.description + "</p> <button>Speak to " + data.name + "</button> <button>Attack " + data.name + "</button>");
+	}
+
+	function displayItem(data) {
+		display.html("<p>" + data.description + "</p> <button>Pick up " + data.name + "</button>");
 	}
 
 	function showError(error) {
