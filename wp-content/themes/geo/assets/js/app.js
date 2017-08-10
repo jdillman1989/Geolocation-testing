@@ -16,6 +16,7 @@ $(document).ready(function(){
 			selat = parseFloat(selatRaw),
 			selon = parseFloat(selonRaw);
 
+		getLocation();
 		setInterval(function(){ getLocation(); }, 10000);
 	}
 
