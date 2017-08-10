@@ -66,9 +66,11 @@ $(document).ready(function(){
 		var lat = parseFloat(position.coords.latitude);
 		var lon = parseFloat(position.coords.longitude);
 
-		console.log(lat);
+		console.log(locationData);
 
 		for (var i = 0; i <= locationData.coords.length-1; i++) {
+
+			console.log(locationData.coords[i]);
 
 			if (lat < locationData.coords[i].nw.lat && lat > locationData.coords[i].se.lat && lon > locationData.coords[i].nw.lon && lon < locationData.coords[i].se.lon){
 				
