@@ -43,7 +43,7 @@ $(document).ready(function(){
 					url: '/wp-admin/admin-ajax.php?action=play_area',
 					data: {data:gameID},
 					complete: function(response) {
-						locationData = response.responseText;
+						locationData = JSON.parse(response.responseText);
 						setInterval(function(){
 							navigator.geolocation.getCurrentPosition(watchLocations, showError);
 						}, 2000);
